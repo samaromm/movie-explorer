@@ -5,32 +5,34 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom';
+ 
 
 
 
 
 
 export default class MoviesList extends Component {
-
+    
 
     render() {
 
         const baseURL = "http://image.tmdb.org/t/p/w1280/"
         // console.log(this.props.list) 
         const list = this.props.list.map(movie =>
-            <Grid item xs={4}>
+            <Grid key={movie.id} item xs={4}>
                 <Paper>
 
-                    <Card >
+                    <Card>
                         <CardActionArea>
-                            
-                            <CardContent>
-                                <img src={baseURL + movie.poster_path} width="100%" alt="Poster" />
+                        <Link to='/details/' exact >
+                            <CardContent onClick={() => this.props.handleClick(movie.id)} >
+                            <img src={baseURL + movie.poster_path} width="100%" alt="Poster"/>
                                 <Typography gutterBottom variant="h5" component="h2">
                                     {movie.original_title}
-                                </Typography>
-                               
+                                </Typography>             
                             </CardContent>
+                        </Link>
                         </CardActionArea>
                     </Card>
                 </Paper>
